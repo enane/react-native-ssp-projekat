@@ -234,15 +234,6 @@ const Hotels = ({navigation}) => {
                                 }}
                                 color={'#EE6800'}
                                 title='Add Task'/>
-                            {/*<OptionItem*/}
-                            {/*    style={styles.icon}*/}
-                            {/*    icon={icons.plus}*/}
-                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
-                            {/*    label="Add"*/}
-                            {/*    onPress={() => {*/}
-                            {/*        insertHotel();*/}
-                            {/*    }}*/}
-                            {/*/>*/}
                             <pre>       </pre>
                             <Button
                                 color="#FF2F02"
@@ -252,16 +243,6 @@ const Hotels = ({navigation}) => {
                                 }}
                                 color={'#EE6800'}
                                 title='Exit'/>
-                            {/*<OptionItem*/}
-                            {/*    style={styles.icon}*/}
-                            {/*    icon={icons.back}*/}
-                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
-                            {/*    label="Exit"*/}
-                            {/*    onPress={() => {*/}
-                            {/*        setInsertHotelBox(false)*/}
-                            {/*        clearHotels();*/}
-                            {/*    }}*/}
-                            {/*/>*/}
                         </View>
                         {error && (<View style={styles.alertBox}>
                             <Text>{error}</Text>
@@ -285,26 +266,37 @@ const Hotels = ({navigation}) => {
 
                         </View>
                         <View style={styles.icon}>
-                            <OptionItem
-                                style={styles.icon}
-                                icon={icons.minus}
-                                bgColor={['#46aeff', '#5884ff']}
-                                label="Delete"
-                                onPress={() => {
-                                    deleteHotel();
-                                }}
-                            />
+                            <Button color={'#F32901'}
+                                    onPress={() => {
+                                        deleteHotel();
+                                    }}
+                                    title='Delete'/>
+                            {/*<OptionItem*/}
+                            {/*    style={styles.icon}*/}
+                            {/*    icon={icons.minus}*/}
+                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
+                            {/*    label="Delete"*/}
+                            {/*    onPress={() => {*/}
+                            {/*        deleteHotel();*/}
+                            {/*    }}*/}
+                            {/*/>*/}
                             <pre>       </pre>
-                            <OptionItem
-                                style={styles.icon}
-                                icon={icons.back}
-                                bgColor={['#46aeff', '#5884ff']}
-                                label="Exit"
-                                onPress={() => {
-                                    setDeleteHotelBox(false)
-                                    clearHotels();
-                                }}
-                            />
+                            <Button color={'#F32901'}
+                                    onPress={() => {
+                                        setDeleteHotelBox(false)
+                                        clearHotels();
+                                    }}
+                                    title='Exit'/>
+                            {/*<OptionItem*/}
+                            {/*    style={styles.icon}*/}
+                            {/*    icon={icons.back}*/}
+                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
+                            {/*    label="Exit"*/}
+                            {/*    onPress={() => {*/}
+                            {/*        setDeleteHotelBox(false)*/}
+                            {/*        clearHotels();*/}
+                            {/*    }}*/}
+                            {/*/>*/}
                         </View>
                         {error && (<View style={styles.alertBox}>
                             <Text>{error}</Text>
@@ -345,24 +337,33 @@ const Hotels = ({navigation}) => {
 
                         </View>
                         <View style={styles.icon}>
-                            <OptionItem
-                                style={styles.icon}
-                                icon={icons.plus}
-                                bgColor={['#46aeff', '#5884ff']}
-                                label="Update"
-                                onPress={() => updateHotel()}
-                            />
+                            <Button color={'#FF8000'}
+                                    onPress={() => updateHotel()}
+                                    title='Update'/>
+                            {/*<OptionItem*/}
+                            {/*    style={styles.icon}*/}
+                            {/*    icon={icons.plus}*/}
+                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
+                            {/*    label="Update"*/}
+                            {/*    onPress={() => updateHotel()}*/}
+                            {/*/>*/}
                             <pre>       </pre>
-                            <OptionItem
-                                style={styles.icon}
-                                icon={icons.back}
-                                bgColor={['#46aeff', '#5884ff']}
-                                label="Exit"
-                                onPress={() => {
-                                    setHotelUpdate(false);
-                                    clearHotels();
-                                }}
-                            />
+                            <Button color={'#F32901'}
+                                    onPress={() => {
+                                        setHotelUpdate(false);
+                                        clearHotels();
+                                    }}
+                                    title='Exit'/>
+                            {/*<OptionItem*/}
+                            {/*    style={styles.icon}*/}
+                            {/*    icon={icons.back}*/}
+                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
+                            {/*    label="Exit"*/}
+                            {/*    onPress={() => {*/}
+                            {/*        setHotelUpdate(false);*/}
+                            {/*        clearHotels();*/}
+                            {/*    }}*/}
+                            {/*/>*/}
                         </View>
                         {error && (<View style={styles.alertBox}>
                             <Text>{error}</Text>
@@ -391,26 +392,10 @@ const Hotels = ({navigation}) => {
                             onPress={() => setInsertHotelBox(!insertHotelBox)}
                         color={'#EE6800'}
                             title='Add Task'/>
-                    {/*<OptionItem*/}
-                    {/*    // icon={icons.plus}*/}
-                    {/*    bgColor={['#46aeff', '#5884ff']}*/}
-                    {/*    label="Add task"*/}
-                    {/*    onPress={() => setInsertHotelBox(!insertHotelBox)}*/}
-                    {/*/>*/}
                     <Button color={'#F32901'} onPress={() => setDeleteHotelBox(!deleteHotelBox)} title='Delete Task'/>
-                    {/*<OptionItem*/}
-                    {/*    icon={icons.minus}*/}
-                    {/*    bgColor={['#fddf90', '#fcda13']}*/}
-                    {/*    label="Delete task"*/}
-                    {/*    onPress={() => setDeleteHotelBox(!deleteHotelBox)}*/}
-                    {/*/>*/}
+
                     <Button color='#BD2102' onPress={() => setHotelUpdate(!hotelUpdate)} title='Update Task'/>
-                    {/*<OptionItem*/}
-                    {/*    icon={icons.update}*/}
-                    {/*    bgColor={['#e973ad', '#da5df2']}*/}
-                    {/*    label="Update tast"*/}
-                    {/*    onPress={() => setHotelUpdate(!hotelUpdate)}*/}
-                    {/*/>*/}
+
                 </View>
 
             </View>

@@ -5,7 +5,7 @@ import {
     Image,
     Text,
     TouchableOpacity,
-    FlatList, TextInput
+    FlatList, TextInput, Button
 } from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
 import {images, icons, COLORS, FONTS, SIZES} from '../../constants';
@@ -32,16 +32,26 @@ const OptionItem = ({bgColor, icon, label, onPress}) => {
                     start={{x: 0, y: 0}}
                     end={{x: 0, y: 1}}
                 >
-                    <Image
-                        id={1}
-                        source={icon}
-                        resizeMode="cover"
-                        style={{
-                            tintColor: COLORS.white,
-                            width: 20,
-                            height: 30,
-                        }}
-                    />
+                    {/*<Image*/}
+                    {/*    id={1}*/}
+                    {/*    source={icon}*/}
+                    {/*    resizeMode="cover"*/}
+                    {/*    style={{*/}
+                    {/*        tintColor: COLORS.white,*/}
+                    {/*        width: 20,*/}
+                    {/*        height: 30,*/}
+                    {/*    }}*/}
+                    {/*/>*/}
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <Image
+                            source={images.homeLogo}
+                            resizeMode="contain"
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                            }}
+                        />
+                    </View>
                 </LinearGradient>
             </View>
             <Text style={{marginTop: SIZES.base, color: COLORS.gray, ...FONTS.body3}}>{label}</Text>
@@ -90,7 +100,6 @@ const Home = ({navigation}) => {
             axios.post("http://localhost:5000/addPicture",
                 formData
             );
-
             setFile(formData);
             console.log(category_name);
             axios.post("http://localhost:5000/api/hotels/addLicence", {
@@ -120,13 +129,13 @@ const Home = ({navigation}) => {
         });
         const insertResponseData = await insertResponse.json();
         console.log(insertResponseData);
-        // if (insertResponseData.message === 'This category cannot be deleted beacuse it is used by a task. Delete tasks first.'){
-        //     setError(insertResponseData.message);
-        // }else if(insertResponseData.message === 'Requested category does not exist'){
-        //     setError(insertResponseData.message);
-        // }else if(insertResponseData.message === 'Category deleted'){
-        //     setError(insertResponseData.message);
-        // }
+        if (insertResponseData.message === 'This category cannot be deleted beacuse it is used by a task. Delete tasks first.'){
+            setError(insertResponseData.message);
+        }else if(insertResponseData.message === 'Requested category does not exist'){
+            setError(insertResponseData.message);
+        }else if(insertResponseData.message === 'Category deleted'){
+            setError(insertResponseData.message);
+        }
         fetchData();
     }
 
@@ -231,24 +240,36 @@ const Home = ({navigation}) => {
                             <input name='image' type='file' onChange={saveFile} />
                         </View>
                         <View style={styles.icon}>
-                            <OptionItem
-                                style={styles.icon}
-                                icon={icons.plus}
-                                bgColor={['#46aeff', '#5884ff']}
-                                label="Add"
+                            <Button
+                                color="#FF2F02"
                                 onPress={insertLicence}
-                            />
-                            <pre>       </pre>
-                            <OptionItem
-                                style={styles.icon}
-                                icon={icons.back}
-                                bgColor={['#46aeff', '#5884ff']}
-                                label="Exit"
-                                onPress={() => {
-                                    setInsertLicenceBox(false);
-                                    clearLicences();
-                                }}
-                            />
+                                // onPress={insertLicence}
+                                color={'#EE6800'}
+                                title='Add'/>
+                            <Button color={'#F32901'}
+                                    onPress={() => {
+                                        setInsertLicenceBox(false);
+                                        clearLicences();
+                                    }}
+                                    title='Exit'/>
+                            {/*<OptionItem*/}
+                            {/*    style={styles.icon}*/}
+                            {/*    icon={icons.plus}*/}
+                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
+                            {/*    label="Add"*/}
+                            {/*    onPress={insertLicence}*/}
+                            {/*/>*/}
+                            {/*<pre>       </pre>*/}
+                            {/*<OptionItem*/}
+                            {/*    style={styles.icon}*/}
+                            {/*    icon={icons.back}*/}
+                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
+                            {/*    label="Exit"*/}
+                            {/*    onPress={() => {*/}
+                            {/*        setInsertLicenceBox(false);*/}
+                            {/*        clearLicences();*/}
+                            {/*    }}*/}
+                            {/*/>*/}
                         </View>
                         {error && (<View style={styles.alertBox}>
                             <Text>{error}</Text>
@@ -272,26 +293,39 @@ const Home = ({navigation}) => {
 
                         </View>
                         <View style={styles.icon}>
-                            <OptionItem
-                                style={styles.icon}
-                                icon={icons.minus}
-                                bgColor={['#46aeff', '#5884ff']}
-                                label="Delete"
-                                onPress={() => {
-                                    deleteLicence();
-                                }}
-                            />
+                            <Button color={'#F32901'}
+                                    onPress={() => {
+                                        setDeleteLicenceBox(false)
+                                        clearLicences();
+                                    }}
+
+                                    title='Delete'/>
+                            {/*<OptionItem*/}
+                            {/*    style={styles.icon}*/}
+                            {/*    icon={icons.minus}*/}
+                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
+                            {/*    label="Delete"*/}
+                            {/*    onPress={() => {*/}
+                            {/*        deleteLicence();*/}
+                            {/*    }}*/}
+                            {/*/>*/}
                             <pre>       </pre>
-                            <OptionItem
-                                style={styles.icon}
-                                icon={icons.back}
-                                bgColor={['#46aeff', '#5884ff']}
-                                label="Exit"
-                                onPress={() => {
-                                    setDeleteLicenceBox(false)
-                                    clearLicences();
-                                }}
-                            />
+                            <Button color={'#F32901'}
+                                    onPress={() => {
+                                        setDeleteLicenceBox(false)
+                                        clearLicences();
+                                    }}
+                                    title='Exit'/>
+                            {/*<OptionItem*/}
+                            {/*    style={styles.icon}*/}
+                            {/*    icon={icons.back}*/}
+                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
+                            {/*    label="Exit"*/}
+                            {/*    onPress={() => {*/}
+                            {/*        setDeleteLicenceBox(false)*/}
+                            {/*        clearLicences();*/}
+                            {/*    }}*/}
+                            {/*/>*/}
                         </View>
                         {error && (<View style={styles.alertBox}>
                             <Text>{error}</Text>
@@ -337,25 +371,35 @@ const Home = ({navigation}) => {
                             {/*/>*/}
                         </View>
                         <View style={styles.icon}>
-                            <OptionItem
-                                style={styles.icon}
-                                icon={icons.plus}
-                                bgColor={['#46aeff', '#5884ff']}
-                                label="Update"
-                                onPress={() => updateLicence()}
-                            />
+                            <Button color={'#FF8000'}
+                                    onPress={() => updateLicence()}
+                                    title='Update'/>
+                            {/*<OptionItem*/}
+                            {/*    style={styles.icon}*/}
+                            {/*    icon={icons.plus}*/}
+                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
+                            {/*    label="Update"*/}
+                            {/*    onPress={() => updateLicence()}*/}
+                            {/*/>*/}
                             <pre>       </pre>
-                            <OptionItem
-                                style={styles.icon}
-                                icon={icons.back}
-                                bgColor={['#46aeff', '#5884ff']}
-                                label="Exit"
-                                onPress={() => {
-                                    setLicenceUpdate(false);
-                                    clearLicences();
+                            <Button color={'#F32901'}
+                                    onPress={() => {
+                                        setLicenceUpdate(false);
+                                        clearLicences();
 
-                                }}
-                            />
+                                    }}
+                                    title='Exit'/>
+                            {/*<OptionItem*/}
+                            {/*    style={styles.icon}*/}
+                            {/*    icon={icons.back}*/}
+                            {/*    bgColor={['#46aeff', '#5884ff']}*/}
+                            {/*    label="Exit"*/}
+                            {/*    onPress={() => {*/}
+                            {/*        setLicenceUpdate(false);*/}
+                            {/*        clearLicences();*/}
+
+                            {/*    }}*/}
+                            {/*/>*/}
                         </View>
                         {error && (<View style={styles.alertBox}>
                             <Text>{error}</Text>
@@ -378,30 +422,43 @@ const Home = ({navigation}) => {
 
             {/* Options */}
             <View style={{flex: 1, justifyContent: 'center'}}>
-                <View style={{flexDirection: 'row', marginTop: SIZES.padding, paddingHorizontal: SIZES.base}}>
-                    <OptionItem
-                        icon={icons.plus}
-                        bgColor={['#46aeff', '#5884ff']}
-                        label="Add category"
+                    <View style={{flexDirection: 'row', marginTop: SIZES.padding, paddingHorizontal: SIZES.base, justifyContent: 'space-around'}}>
+                    <Button
+                        color="#FF2F02"
                         onPress={() => {
                             setInsertLicenceBox(!insertLicenceBox)
 
                         }}
-                    />
-                    <OptionItem
-                        icon={icons.minus}
-                        bgColor={['#fddf90', '#fcda13']}
-                        label="Delete category"
-                        onPress={() => setDeleteLicenceBox(!deleteLicenceBox)}
-                    />
-                    <OptionItem
-                        icon={icons.update}
-                        bgColor={['#e973ad', '#da5df2']}
-                        label="Update category"
-                        onPress={() => {
-                            setLicenceUpdate(!licenceUpdate)
-                        }}
-                    />
+                        color={'#EE6800'}
+                        title='Add Category'/>
+                    <Button color={'#F32901'} onPress={() => setDeleteLicenceBox(!deleteLicenceBox)} title='Delete category'/>
+
+                    <Button color='#BD2102'  onPress={() => {
+                        setLicenceUpdate(!licenceUpdate)
+                    }} title='Update Task'/>
+                    {/*<OptionItem*/}
+                    {/*    icon={icons.plus}*/}
+                    {/*    bgColor={['#46aeff', '#5884ff']}*/}
+                    {/*    label="Add category"*/}
+                    {/*    onPress={() => {*/}
+                    {/*        setInsertLicenceBox(!insertLicenceBox)*/}
+
+                    {/*    }}*/}
+                    {/*/>*/}
+                    {/*<OptionItem*/}
+                    {/*    icon={icons.minus}*/}
+                    {/*    bgColor={['#fddf90', '#fcda13']}*/}
+                    {/*    label="Delete category"*/}
+                    {/*    onPress={() => setDeleteLicenceBox(!deleteLicenceBox)}*/}
+                    {/*/>*/}
+                    {/*<OptionItem*/}
+                    {/*    icon={icons.update}*/}
+                    {/*    bgColor={['#e973ad', '#da5df2']}*/}
+                    {/*    label="Update category"*/}
+                    {/*    onPress={() => {*/}
+                    {/*        setLicenceUpdate(!licenceUpdate)*/}
+                    {/*    }}*/}
+                    {/*/>*/}
                 </View>
             </View>
 

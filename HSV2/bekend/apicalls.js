@@ -61,6 +61,13 @@ const updateLicence = (req,res) =>{
 
 const addHotel = (req,res) =>{
     const { task_name, category_name} = req.body
+    const check = 'SELECT FROM categories WHERE name = ?';
+    connection.query(check, [category_name], (err,rows)=>{
+        if(!rows){
+            res.send({message :'Invalid category name'});
+            console.log(err);
+        }
+    })
     connection.query(`INSERT INTO tasks SET ?`,
         { name: task_name, category_name: category_name, date: new Date().toISOString() }, (err, rows) => {
             if(rows)res.send({ message: 'Task created' } )
